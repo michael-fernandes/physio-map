@@ -17,7 +17,7 @@ function DataEntry() {
         <div className="drag-up-button">
           <ScrollButton onClick={handleToggle} text="Enter Data" />
           <Drawer open={open} onRequestclose={handleToggle} modalElementClass="data-entry-menu">
-            <ScrollButton onClick={handleToggle} text="Close Data" />
+            <ScrollButton onClick={handleToggle} text="Close" />
             <div className="data-entry">
               <InputTable />
             </div>
