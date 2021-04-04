@@ -1,4 +1,5 @@
 import React, { useCallback, useEffect, useRef } from 'react';
+import PropTypes from 'prop-types';
 
 import { useSelector } from 'react-redux';
 
@@ -13,16 +14,16 @@ const DISABLED_OPACITY = 0.1;
 const ACTIVE_OPACITY = 0.75;
 const TEXT_WIDTH = 150;
 const xRadius = (radius, theta, slice) => (radius) * Math.sin(theta * (slice) + theta / 2);
-// const xRadius = (radius, theta, slice) => { console.log((radius, theta, slice)); return xFunc((radius, theta, slice)); };
 
 const yRadius = (radius, theta, slice) => (radius) * Math.cos(theta * (slice) + theta / 2) * -1;
 
 const isFullRadian = (theta, slice) => (10 * ((slice + 1 / 2) * theta / Math.PI) % 10 == 0);
 const yTextOffset = (theta, slice) => (isFullRadian(theta, slice) ? 5 : 0);
 
-function ChartArea({ width, height }) {
+function ConcentricChart({ width, height }) {
   const ref = useRef();
   const textRef = useRef();
+  const concentricRef = useRef();
 
   const data = useSelector(getSessionData);
 
@@ -62,7 +63,7 @@ function ChartArea({ width, height }) {
       .padAngle(PAD_ANGLE)
       .padRadius(radius)
       .cornerRadius(1)();
-  }, [getAngle, ringWidth]);
+  }, [getAngle, ringWidth, radius]);
 
   const enterRadar = useCallback((enter) => {
     enter
@@ -75,26 +76,24 @@ function ChartArea({ width, height }) {
       .attr('className', (d) => `${d.name}`);
   }, [arcGen, height, width]);
 
-  const updateRadar = useCallback((update) =>
-    update
-      .attr('transform', `translate(${width / 2},${height / 2})`)
-      .attr('d', (d) => arcGen(d.slice, d.level))
-      .attr('opacity', (d) => (d.active ? ACTIVE_OPACITY : DISABLED_OPACITY))
-      .attr('fill', (d) => COLORS[d.level]),
-    [arcGen, height, width]);
+  const updateRadar = useCallback((update) => update
+    .attr('transform', `translate(${width / 2},${height / 2})`)
+    .attr('d', (d) => arcGen(d.slice, d.level))
+    .attr('opacity', (d) => (d.active ? ACTIVE_OPACITY : DISABLED_OPACITY))
+    .attr('fill', (d) => COLORS[d.level]),
+  [arcGen, height, width]);
 
-  const textUpdate = useCallback((enter) =>
-    enter
-      .attr('transform', `translate(${width / 2},${height / 2})`)
-      .attr('text-anchor', (d) => getAnchor(d))
-      .attr('x', (d) => xRadius(radius, theta, d.slice))
-      .attr('y', (d) => yRadius(radius, theta, d.slice) + yTextOffset(theta, d.slice)),
-    [theta, height, width]);
+  const textUpdate = useCallback((enter) => enter
+    .attr('transform', `translate(${width / 2},${height / 2})`)
+    .attr('text-anchor', (d) => getAnchor(d))
+    .attr('x', (d) => xRadius(radius, theta, d.slice))
+    .attr('y', (d) => yRadius(radius, theta, d.slice) + yTextOffset(theta, d.slice)),
+  [theta, height, width]);
 
   const textEnter = useCallback((enter) => {
     enter
       .append('text')
-      .attr('key', d => `${d.name}`)
+      .attr('key', (d) => `${d.name}`)
       .attr('transform', `translate(${width / 2},${height / 2})`)
       .attr('class', 'labels')
       .attr('font-size', 12)
@@ -122,16 +121,19 @@ function ChartArea({ width, height }) {
         .join(textEnter, textUpdate, (exit) => exit.remove());
     }
   }, [width, height, enterRadar, data.data, data.labels]);
-  console.log(data);
+
   return (
     <div className="custom-chart">
       <div>
-      {data.data.length ?
-        <svg width={width} height={height}>
-          <g className="concentric-radar" ref={ref} />
-          <g className="labels" ref={textRef} />
-        </svg>
-        : <NoData />}
+        {data.data.length
+          ? (
+            <svg width={width} height={height}>
+              <g className="concentric-radar" ref={ref} />
+              <g className="labels" ref={textRef} />
+              <g className="concentric-lables" ref={concentricRef} />
+            </svg>
+          )
+          : <NoData />}
       </div>
       <div className="radio-buttons">
         <ToggleChart />
@@ -140,4 +142,9 @@ function ChartArea({ width, height }) {
   );
 }
 
-export default ChartArea;
+ConcentricChart.propTypes = {
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
+};
+
+export default ConcentricChart;
