@@ -13,16 +13,14 @@ function App() {
   const [ref, { width = 0 }] = useMeasure();
   const isMobile = width < TABLE_WIDTH;
   return (
-    <>
-      <Context.Provider value={isMobile}>
-        <div>
-          <div ref={ref} className="App">
-            <Chart />
-            <DataEntry />
-          </div>
+    <Context.Provider value={isMobile}>
+      <div>
+        <div ref={ref} className="App">
+          <Chart />
+          <DataEntry />
         </div>
-      </Context.Provider>
-    </>
+      </div>
+    </Context.Provider>
   );
 }
 
