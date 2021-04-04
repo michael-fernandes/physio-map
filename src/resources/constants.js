@@ -1,19 +1,18 @@
-// LABELS
-
-//gait
+import objectFlip from './util';
+// gait
 export const GAIT_ID = 'Gait Speed';
 export const STRIDE_LENGTH_ID = 'Stride Length';
 
-//balance
+// balance
 export const BALANCE_ID = '90-sec Balance';
 export const SWAY_AREA_ID = 'Postural Sway Area, ECUB';
 export const SWAY_RMS_ID = 'Postural Sway RMS, ECUB';
 
-//Turns
+// Turns
 export const TURN_DURATION_ID = '360-Turn Duration';
 export const TURN_VELOCITY_ID = '360-Turn Peak Velocity';
 
-//Sit to stand
+// Sit to stand
 export const FTSTS_TIME = 'FTSTS Time';
 export const SIT_TO_STAND_DURATION = 'Sit to Stand Duration';
 
@@ -41,26 +40,16 @@ export const LABEL_ORDER = [
   SIT_TO_STAND_DURATION,
 ];
 
-//https://stackoverflow.com/questions/23013573/swap-key-with-value-json
-function objectFlip(obj) {
-  const ret = {};
-  Object.keys(obj).forEach(key => {
-    ret[obj[key]] = key;
-  });
-  return ret;
-}
-
 export const SHORT_NAME_REVERSE = objectFlip(NAME_LOOKUP);
 
 export const AGE = 'Age';
 export const COGNITIVE_STATUS = 'Cognitive Status';
 export const SEX = 'Sex';
 
-
 export const FUNCTION = 'Function';
 export const GAIT = 'Gait';
 export const BALANCE = 'Balance';
-export const TURNS = "Turns";
+export const TURNS = 'Turns';
 
 //  metrics
 export const SPEED = 'm/s';
@@ -78,7 +67,7 @@ export const SCORE_DIMENSION = 'SCORE_DIMENSION';
 // Session
 export const SESSION = 'SESSION';
 
-export const RADAR = 'radar';
-export const CONCENTRIC = 'concentric'
+export const RADAR = 'Radar';
+export const CONCENTRIC = 'Concentric';
 
 export const CHART = 'CHART';

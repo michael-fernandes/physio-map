@@ -1,27 +1,32 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { PageHeader } from 'antd';
 import { useSelector } from 'react-redux';
 import { useMeasure } from 'react-use';
-import { ChartArea } from '../components/custom/chart';
+import { ConcentricChart } from '../components/custom/chart';
 import RadarChart from '../components/charts/RadarChart';
 import NoData from '../components/ui/NoData';
-import { getEmptyData, getChartType } from '../store/selectors';
+import { getEmptyData, getChartType, getSubtitle } from '../store/selectors';
 
 import { RADAR, CONCENTRIC } from '../resources/constants';
 
 const charts = {
   [RADAR]: RadarChart,
-  [CONCENTRIC]: ChartArea,
+  [CONCENTRIC]: ConcentricChart,
 };
 
 export default function Chart() {
   const [ref, { width, height }] = useMeasure();
   const enteredData = useSelector(getEmptyData);
   const chart = useSelector(getChartType);
+  const subtitle = useSelector(getSubtitle);
   const ChartComponent = charts[chart];
 
   return (
     <>
-      <h1>PhysioMap</h1>
+      <div className="pageHeader">
+        <PageHeader title="Physio Map" subTitle={subtitle} />
+      </div>
+
       <div ref={ref} className="single-chart-wrapper">
         <div className="chart-wrapper">
           {enteredData

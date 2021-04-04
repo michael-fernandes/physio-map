@@ -14,20 +14,25 @@ export default function ChartButtons({ setView, session }) {
     <div>
       <div className="chart-buttons">
         {chart === CONCENTRIC
-          ? <Button
-            onClick={() => dispatch(setChartType(RADAR))}
-            icon={<RadarChartOutlined />}
-            type="text" >
-            Toggle Chart
-          </Button>
-          : <Button
-            onClick={() => dispatch(setChartType(CONCENTRIC))}
-            icon={<HeatMapOutlined />}
-            type="text" >
-            Toggle Chart
-          </Button>
-        }
+          ? (
+            <Button
+              onClick={() => dispatch(setChartType(RADAR))}
+              icon={<RadarChartOutlined />}
+              type="text"
+            >
+              Show Radar Chart
+            </Button>
+          )
+          : (
+            <Button
+              onClick={() => dispatch(setChartType(CONCENTRIC))}
+              icon={<HeatMapOutlined />}
+              type="text"
+            >
+              Show Concentric Chart
+            </Button>
+          )}
       </div>
-    </div >
+    </div>
   );
-};
+}

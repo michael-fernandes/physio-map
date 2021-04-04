@@ -18,4 +18,5 @@ export const DATA_DIMENSIONS = {
   levels: max(Object.values(inputData)),
 };
 
-export const COLORS = ['#958c84', '#cc8fa0', '#f2abab', '#8e92c1', '#7baece', '#92be6c'];
+export const PASTEL_COLORS = ['#958c84', '#cc8fa0', '#f2abab', '#8e92c1', '#7baece', '#92be6c'];
+export const COLORS = ['#7B3014', '#D04A07', '#F9BC40', '#5AA5CD', '#236CA7', '#26456E'];

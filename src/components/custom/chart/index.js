@@ -1,1 +1,1 @@
-export { default as ChartArea } from './ChartArea';
+export { default as ConcentricChart } from './ConcentricChart';

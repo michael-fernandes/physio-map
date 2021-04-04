@@ -1,5 +1,5 @@
 import { createStore } from 'redux';
-import reducer from './reducer'
+import reducer from './reducer';
 import defaultState from './defaultState';
 
 export default function store() {
