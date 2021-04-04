@@ -1,13 +1,30 @@
 body {
   overflow-x: hidden;
   position: relative;
-  color: rgba(0,0,0,0.75);  
+  color:  #3A3A3A;  
   padding-top: 10px; /* TODO: add overall padding */
 }
 
-h1, h4 {
+
+.pageHeader {
+  margin: 0 auto;
+  width: 500;
+}
+
+.pageHeader > * {
+  width: 500;
+}
+
+.app-title {
   text-align: center;
-  color:  rgba(0,0,0,0.75);  
+  color: #3A3A3A;
+}
+
+
+/* overrides ant styling */
+.domain-title { 
+  font-weight: bold;
+  margin-bottom: 0px;
 }
 
 /* no data */
@@ -90,7 +107,7 @@ h1, h4 {
 .input-label {
   display: inline-block;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 400;
   margin-right: 10px;
 }
 
@@ -98,6 +115,7 @@ h1, h4 {
   flex: 1;
   width: 150px;
   max-width: 150px;
+  transition: 'width' 2s;
 }
 
 /********** Radio Buttons ********/
@@ -123,7 +141,7 @@ h3 {
 }
 
 .recharts-polar-radius-axis-tick-value > tspan {
-  fill:black;
+  fill: #303030;
 }
 
 .single-chart-wrapper {
